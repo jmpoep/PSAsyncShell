@@ -103,7 +103,7 @@ if ($args[0] -eq "-t"){ $revb64 = [System.Text.Encoding]::UTF8.GetString([System
 if ($args[0] -eq "-f"){ $revb64 = [System.Convert]::FromBase64String($base64) ; [System.IO.File]::WriteAllBytes($args[2], $revb64)}}
 
 # ------------ Server Side ------------ #
-if ($args[0] -like "-s"){ Show-Banner ; Write-Host "[+] Waiting for new connection..`n" -ForegroundColor Yellow
+if ($args[0] -like "-s"){ if ("-silent" -notin $args) { Show-Banner ; Write-Host "[+] Waiting for new connection..`n" -ForegroundColor Yellow }
 $endpoint = New-Object System.Net.IPEndPoint ([System.Net.IPAddress]::any, "$Port")
 $Listener = New-Object System.Net.Sockets.TcpListener $endpoint
 
